@@ -27,8 +27,8 @@ import (
 	"crypto/rand"
 	"io"
 
-	"github.com/nebulasio/go-nebulas/crypto/hash"
-	"github.com/nebulasio/go-nebulas/util/byteutils"
+	"nebulas-p2p/crypto/hash"
+	"nebulas-p2p/util/byteutils"
 )
 
 func TestFromECDSAPri(t *testing.T) {

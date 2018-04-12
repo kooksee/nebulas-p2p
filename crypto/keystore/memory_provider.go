@@ -21,7 +21,7 @@ package keystore
 import (
 	"errors"
 
-	"github.com/nebulasio/go-nebulas/crypto/cipher"
+	"nebulas-p2p/crypto/cipher"
 )
 
 var (

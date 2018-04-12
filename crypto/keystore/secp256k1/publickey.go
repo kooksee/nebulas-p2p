@@ -21,7 +21,7 @@ package secp256k1
 import (
 	"crypto/ecdsa"
 
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
+	"nebulas-p2p/crypto/keystore"
 )
 
 // PublicKey ecdsa publickey

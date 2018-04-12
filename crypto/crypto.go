@@ -21,8 +21,8 @@ package crypto
 import (
 	"errors"
 
-	"github.com/nebulasio/go-nebulas/crypto/keystore"
-	"github.com/nebulasio/go-nebulas/crypto/keystore/secp256k1"
+	"nebulas-p2p/crypto/keystore"
+	"nebulas-p2p/crypto/keystore/secp256k1"
 )
 
 var (
