@@ -10,16 +10,16 @@ import (
 	mrand "math/rand"
 	"time"
 
-	crypto "github.com/libp2p/go-libp2p-crypto"
-	host "github.com/libp2p/go-libp2p-host"
+	"github.com/libp2p/go-libp2p-crypto"
+	"github.com/libp2p/go-libp2p-host"
 	inet "github.com/libp2p/go-libp2p-net"
-	peer "github.com/libp2p/go-libp2p-peer"
+	"github.com/libp2p/go-libp2p-peer"
 	ps "github.com/libp2p/go-libp2p-peerstore"
-	swarm "github.com/libp2p/go-libp2p-swarm"
+	"github.com/libp2p/go-libp2p-swarm"
 	ma "github.com/multiformats/go-multiaddr"
 
 	bhost "github.com/libp2p/go-libp2p/p2p/host/basic"
-	multicodec "github.com/multiformats/go-multicodec"
+	"github.com/multiformats/go-multicodec"
 	json "github.com/multiformats/go-multicodec/json"
 )
 

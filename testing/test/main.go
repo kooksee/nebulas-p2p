@@ -35,7 +35,7 @@ func main() {
 					fmt.Println(temps[len(temps)-1])
 
 					str := "github.com/agl/ed25519"
-					temps = strings.Split(str, "ghub.com")
+					temps = strings.Split(str, "github.com")
 					fmt.Println(len(temps))
 					fmt.Println(temps)
 					return

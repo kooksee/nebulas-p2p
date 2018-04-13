@@ -23,6 +23,8 @@ import (
 	"time"
 
 	"github.com/hashicorp/golang-lru"
+	"github.com/sirupsen/logrus"
+	"nebulas-p2p/util/logging"
 )
 
 // Dispatcher a message dispatcher service.
@@ -88,9 +90,9 @@ func (dp *Dispatcher) loop() {
 			return
 		case msg := <-dp.receivedMessageCh:
 			msgType := msg.MessageType()
-			/* 			logging.VLog().WithFields(logrus.Fields{
+			logging.VLog().WithFields(logrus.Fields{
 				"msgType": msgType,
-			}).Debug("dispatcher received message") */
+			}).Debug("dispatcher received message")
 
 			v, _ := dp.subscribersMap.Load(msgType)
 			m, _ := v.(*sync.Map)
@@ -100,9 +102,9 @@ func (dp *Dispatcher) loop() {
 				case key.(*Subscriber).msgChan <- msg:
 				default:
 				}
-				// logging.VLog().WithFields(logrus.Fields{
-				// 	"msgType": msgType,
-				// }).Debug("succeed dispatcher received message")
+				logging.VLog().WithFields(logrus.Fields{
+					"msgType": msgType,
+				}).Debug("succeed dispatcher received message")
 				return true
 			})
 		}

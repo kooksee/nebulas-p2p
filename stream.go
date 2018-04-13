@@ -178,7 +178,7 @@ func (s *Stream) SendMessage(messageName string, data []byte, priority int) erro
 	}
 
 	// metrics.
-	metricsPacketsOutByMessageName(messageName, message.Length())
+	// metricsPacketsOutByMessageName(messageName, message.Length())
 
 	// send to pool.
 	message.FlagSendMessageAt()
@@ -202,7 +202,7 @@ func (s *Stream) Write(data []byte) error {
 		return ErrStreamIsNotConnected
 	}
 
-	n, err := s.stream.Write(data)
+	_, err := s.stream.Write(data)
 	if err != nil {
 		logging.VLog().WithFields(logrus.Fields{
 			"err":    err,
@@ -214,8 +214,8 @@ func (s *Stream) Write(data []byte) error {
 	s.latestWriteAt = time.Now().Unix()
 
 	// metrics.
-	metricsPacketsOut.Mark(1)
-	metricsBytesOut.Mark(int64(n))
+	// metricsPacketsOut.Mark(1)
+	// metricsBytesOut.Mark(int64(n))
 
 	return nil
 }
@@ -223,7 +223,7 @@ func (s *Stream) Write(data []byte) error {
 // WriteNebMessage write neb msg in the stream
 func (s *Stream) WriteNebMessage(message *NebMessage) error {
 	// metrics.
-	metricsPacketsOutByMessageName(message.MessageName(), message.Length())
+	// metricsPacketsOutByMessageName(message.MessageName(), message.Length())
 
 	err := s.Write(message.Content())
 	message.FlagWriteMessageAt()
@@ -369,9 +369,9 @@ func (s *Stream) readLoop() {
 			}).Debugf("Received %s message from peer.", message.MessageName())
 
 			// metrics.
-			metricsPacketsIn.Mark(1)
-			metricsBytesIn.Mark(int64(message.Length()))
-			metricsPacketsInByMessageName(message.MessageName(), message.Length())
+			// metricsPacketsIn.Mark(1)
+			// metricsBytesIn.Mark(int64(message.Length()))
+			// metricsPacketsInByMessageName(message.MessageName(), message.Length())
 
 			// handle message.
 			if err := s.handleMessage(message); err == ErrShouldCloseConnectionAndExitLoop {

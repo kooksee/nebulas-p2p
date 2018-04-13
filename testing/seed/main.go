@@ -94,8 +94,7 @@ func makeRandomHost(port int) host.Host {
 	ps := ps.NewPeerstore()
 	ps.AddPrivKey(pid, priv)
 	ps.AddPubKey(pid, pub)
-	n, _ := swarm.NewNetwork(context.Background(),
-		[]ma.Multiaddr{listen}, pid, ps, nil)
+	n, _ := swarm.NewNetwork(context.Background(),[]ma.Multiaddr{listen}, pid, ps, nil)
 	return bhost.New(n)
 }
 

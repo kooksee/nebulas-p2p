@@ -29,11 +29,12 @@ import (
 	"time"
 
 	"github.com/multiformats/go-multiaddr"
-	"nebulas-p2p/pb"
 	"github.com/libp2p/go-libp2p-kbucket"
 	"github.com/libp2p/go-libp2p-peer"
 	"github.com/libp2p/go-libp2p-peerstore"
 	ma "github.com/multiformats/go-multiaddr"
+
+	"nebulas-p2p/pb"
 )
 
 // Route Table Errors

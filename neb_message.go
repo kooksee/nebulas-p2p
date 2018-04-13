@@ -24,7 +24,7 @@ import (
 	"hash/crc32"
 	"time"
 
-	byteutils "github.com/nebulasio/go-nebulas/util/byteutils"
+	byteutils "nebulas-p2p/util/byteutils"
 	"github.com/nebulasio/go-nebulas/util/logging"
 	"github.com/sirupsen/logrus"
 )

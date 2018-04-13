@@ -31,6 +31,8 @@ import (
 	"github.com/libp2p/go-libp2p-swarm"
 	"github.com/libp2p/go-libp2p/p2p/host/basic"
 	"github.com/multiformats/go-multiaddr"
+	"github.com/sirupsen/logrus"
+	"nebulas-p2p/util/logging"
 )
 
 const letterBytes = "0123456789ABCDEF0123456789ABCDE10123456789ABCDEF0123456789ABCDEF"
@@ -65,10 +67,10 @@ type Node struct {
 func NewNode(config *Config) (*Node, error) {
 	// check Listen port.
 	if err := checkPortAvailable(config.Listen); err != nil {
-		// logging.CLog().WithFields(logrus.Fields{
-		// 	"err":    err,
-		// 	"listen": config.Listen,
-		// }).Error("Listen port is not available.")
+		logging.CLog().WithFields(logrus.Fields{
+			"err":    err,
+			"listen": config.Listen,
+		}).Error("Listen port is not available.")
 		return nil, err
 	}
 
@@ -92,7 +94,7 @@ func NewNode(config *Config) (*Node, error) {
 
 // Start host & route table discovery
 func (node *Node) Start() error {
-	// logging.CLog().Info("Starting NetService Node...")
+	logging.CLog().Info("Starting NetService Node...")
 
 	node.streamManager.Start()
 
@@ -102,20 +104,20 @@ func (node *Node) Start() error {
 
 	node.routeTable.Start()
 
-	// logging.CLog().WithFields(logrus.Fields{
-	// 	"id":                node.ID(),
-	// 	"listening address": node.host.Addrs(),
-	// }).Info("Started NetService Node.")
+	logging.CLog().WithFields(logrus.Fields{
+		"id":                node.ID(),
+		"listening address": node.host.Addrs(),
+	}).Info("Started NetService Node.")
 
 	return nil
 }
 
 // Stop stop a node.
 func (node *Node) Stop() {
-	// logging.CLog().WithFields(logrus.Fields{
-	// 	"id":                node.ID(),
-	// 	"listening address": node.host.Addrs(),
-	// }).Info("Stopping NetService Node...")
+	logging.CLog().WithFields(logrus.Fields{
+		"id":                node.ID(),
+		"listening address": node.host.Addrs(),
+	}).Info("Stopping NetService Node...")
 
 	node.routeTable.Stop()
 	node.stopHost()
@@ -128,10 +130,10 @@ func (node *Node) startHost() error {
 	options.NATManager = basichost.NewNATManager(node.network)
 	host, err := basichost.NewHost(node.context, node.network, options)
 	if err != nil {
-		// logging.CLog().WithFields(logrus.Fields{
-		// 	"err":            err,
-		// 	"listen address": node.config.Listen,
-		// }).Error("Failed to start node.")
+		logging.CLog().WithFields(logrus.Fields{
+			"err":            err,
+			"listen address": node.config.Listen,
+		}).Error("Failed to start node.")
 		return err
 	}
 
@@ -270,10 +272,10 @@ func (node *Node) onStreamConnected(s libnet.Stream) {
 func (node *Node) SendMessageToPeer(messageName string, data []byte, priority int, peerID string) error {
 	stream := node.streamManager.FindByPeerID(peerID)
 	if stream == nil {
-		// logging.VLog().WithFields(logrus.Fields{
-		// 	"pid": peerID,
-		// 	"err": ErrPeerIsNotConnected,
-		// }).Debug("Failed to send msg")
+		logging.VLog().WithFields(logrus.Fields{
+			"pid": peerID,
+			"err": ErrPeerIsNotConnected,
+		}).Debug("Failed to send msg")
 		return ErrPeerIsNotConnected
 	}
 
